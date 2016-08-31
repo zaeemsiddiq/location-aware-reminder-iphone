@@ -14,6 +14,8 @@
 		B76FE3CF1D7593E6008886D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B76FE3CD1D7593E6008886D0 /* Main.storyboard */; };
 		B76FE3D11D7593E6008886D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76FE3D01D7593E6008886D0 /* Assets.xcassets */; };
 		B76FE3D41D7593E6008886D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B76FE3D21D7593E6008886D0 /* LaunchScreen.storyboard */; };
+		B7F41E0E1D7705C10035296B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41E0D1D7705C10035296B /* MapKit.framework */; };
+		B7F41E101D7705D10035296B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41E0F1D7705D10035296B /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		B76FE3D01D7593E6008886D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B76FE3D31D7593E6008886D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B76FE3D51D7593E6008886D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F41E0D1D7705C10035296B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B7F41E0F1D7705D10035296B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F41E101D7705D10035296B /* CoreData.framework in Frameworks */,
+				B7F41E0E1D7705C10035296B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +48,8 @@
 		B76FE3B81D7593E6008886D0 = {
 			isa = PBXGroup;
 			children = (
+				B7F41E0F1D7705D10035296B /* CoreData.framework */,
+				B7F41E0D1D7705C10035296B /* MapKit.framework */,
 				B76FE3C31D7593E6008886D0 /* ContextAwareReminder */,
 				B76FE3C21D7593E6008886D0 /* Products */,
 			);
@@ -296,6 +304,7 @@
 				B76FE3DA1D7593E6008886D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
