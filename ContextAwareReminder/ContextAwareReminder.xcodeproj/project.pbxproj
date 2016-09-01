@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE71D7835E500111B95 /* CategoryListController.swift */; };
+		B74D7AEA1D783B0500111B95 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE91D783B0500111B95 /* CategoryListCell.swift */; };
+		B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B131D7853ED00111B95 /* DatabaseService.swift */; };
 		B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C41D7593E6008886D0 /* AppDelegate.swift */; };
 		B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C61D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld */; };
-		B76FE3CA1D7593E6008886D0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C91D7593E6008886D0 /* MasterViewController.swift */; };
 		B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3CB1D7593E6008886D0 /* DetailViewController.swift */; };
 		B76FE3CF1D7593E6008886D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B76FE3CD1D7593E6008886D0 /* Main.storyboard */; };
 		B76FE3D11D7593E6008886D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76FE3D01D7593E6008886D0 /* Assets.xcassets */; };
@@ -19,10 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B74D7AE71D7835E500111B95 /* CategoryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListController.swift; sourceTree = "<group>"; };
+		B74D7AE91D783B0500111B95 /* CategoryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
+		B74D7B131D7853ED00111B95 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		B76FE3C11D7593E6008886D0 /* ContextAwareReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContextAwareReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76FE3C41D7593E6008886D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B76FE3C71D7593E6008886D0 /* ContextAwareReminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContextAwareReminder.xcdatamodel; sourceTree = "<group>"; };
-		B76FE3C91D7593E6008886D0 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		B76FE3CB1D7593E6008886D0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B76FE3CE1D7593E6008886D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B76FE3D01D7593E6008886D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +49,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B74D7AE21D78343B00111B95 /* ViewControlllers */ = {
+			isa = PBXGroup;
+			children = (
+				B74D7AE71D7835E500111B95 /* CategoryListController.swift */,
+				B74D7AE91D783B0500111B95 /* CategoryListCell.swift */,
+			);
+			name = ViewControlllers;
+			sourceTree = "<group>";
+		};
+		B74D7AE31D78344D00111B95 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		B74D7AE41D78345600111B95 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B74D7B131D7853ED00111B95 /* DatabaseService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		B76FE3B81D7593E6008886D0 = {
 			isa = PBXGroup;
 			children = (
@@ -66,8 +94,10 @@
 		B76FE3C31D7593E6008886D0 /* ContextAwareReminder */ = {
 			isa = PBXGroup;
 			children = (
+				B74D7AE41D78345600111B95 /* Services */,
+				B74D7AE31D78344D00111B95 /* Models */,
+				B74D7AE21D78343B00111B95 /* ViewControlllers */,
 				B76FE3C41D7593E6008886D0 /* AppDelegate.swift */,
-				B76FE3C91D7593E6008886D0 /* MasterViewController.swift */,
 				B76FE3CB1D7593E6008886D0 /* DetailViewController.swift */,
 				B76FE3CD1D7593E6008886D0 /* Main.storyboard */,
 				B76FE3D01D7593E6008886D0 /* Assets.xcassets */,
@@ -150,9 +180,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */,
+				B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */,
+				B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */,
 				B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */,
-				B76FE3CA1D7593E6008886D0 /* MasterViewController.swift in Sources */,
 				B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */,
+				B74D7AEA1D783B0500111B95 /* CategoryListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
