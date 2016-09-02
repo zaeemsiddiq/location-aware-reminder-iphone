@@ -10,6 +10,13 @@
 		B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE71D7835E500111B95 /* CategoryListController.swift */; };
 		B74D7AEA1D783B0500111B95 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE91D783B0500111B95 /* CategoryListCell.swift */; };
 		B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B131D7853ED00111B95 /* DatabaseService.swift */; };
+		B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B151D79565100111B95 /* CategoryColor.swift */; };
+		B74D7B591D7960A800111B95 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B531D7960A800111B95 /* Category+CoreDataProperties.swift */; };
+		B74D7B5A1D7960A800111B95 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B541D7960A800111B95 /* Category.swift */; };
+		B74D7B5B1D7960A800111B95 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B551D7960A800111B95 /* Location+CoreDataProperties.swift */; };
+		B74D7B5C1D7960A800111B95 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B561D7960A800111B95 /* Location.swift */; };
+		B74D7B5D1D7960A800111B95 /* Reminder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B571D7960A800111B95 /* Reminder+CoreDataProperties.swift */; };
+		B74D7B5E1D7960A800111B95 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B581D7960A800111B95 /* Reminder.swift */; };
 		B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C41D7593E6008886D0 /* AppDelegate.swift */; };
 		B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C61D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld */; };
 		B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3CB1D7593E6008886D0 /* DetailViewController.swift */; };
@@ -24,6 +31,13 @@
 		B74D7AE71D7835E500111B95 /* CategoryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListController.swift; sourceTree = "<group>"; };
 		B74D7AE91D783B0500111B95 /* CategoryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
 		B74D7B131D7853ED00111B95 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		B74D7B151D79565100111B95 /* CategoryColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
+		B74D7B531D7960A800111B95 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "../Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B74D7B541D7960A800111B95 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
+		B74D7B551D7960A800111B95 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "../Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B74D7B561D7960A800111B95 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ../Location.swift; sourceTree = "<group>"; };
+		B74D7B571D7960A800111B95 /* Reminder+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Reminder+CoreDataProperties.swift"; path = "../Reminder+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B74D7B581D7960A800111B95 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
 		B76FE3C11D7593E6008886D0 /* ContextAwareReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContextAwareReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76FE3C41D7593E6008886D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B76FE3C71D7593E6008886D0 /* ContextAwareReminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContextAwareReminder.xcdatamodel; sourceTree = "<group>"; };
@@ -61,6 +75,13 @@
 		B74D7AE31D78344D00111B95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B74D7B531D7960A800111B95 /* Category+CoreDataProperties.swift */,
+				B74D7B541D7960A800111B95 /* Category.swift */,
+				B74D7B551D7960A800111B95 /* Location+CoreDataProperties.swift */,
+				B74D7B561D7960A800111B95 /* Location.swift */,
+				B74D7B571D7960A800111B95 /* Reminder+CoreDataProperties.swift */,
+				B74D7B581D7960A800111B95 /* Reminder.swift */,
+				B74D7B151D79565100111B95 /* CategoryColor.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -180,11 +201,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */,
+				B74D7B5C1D7960A800111B95 /* Location.swift in Sources */,
 				B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */,
+				B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */,
 				B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */,
+				B74D7B5B1D7960A800111B95 /* Location+CoreDataProperties.swift in Sources */,
 				B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */,
+				B74D7B5A1D7960A800111B95 /* Category.swift in Sources */,
 				B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */,
+				B74D7B5E1D7960A800111B95 /* Reminder.swift in Sources */,
 				B74D7AEA1D783B0500111B95 /* CategoryListCell.swift in Sources */,
+				B74D7B591D7960A800111B95 /* Category+CoreDataProperties.swift in Sources */,
+				B74D7B5D1D7960A800111B95 /* Reminder+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

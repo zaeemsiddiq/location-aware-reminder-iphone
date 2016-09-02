@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
         
-        DatabaseService.managedObjectContext = self.managedObjectContext        
+        //DatabaseService.managedObjectContext = self.managedObjectContext
         return true
     }
 
