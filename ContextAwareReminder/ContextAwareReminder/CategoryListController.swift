@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoryListController: UITableViewController {
 
+    var managedObjectContext: NSManagedObjectContext
+    var categoryList: NSMutableArray
+    var currentCategory: Category?
+    
+    required init?(coder aDecoder: NSCoder) {
+        categoryList = NSMutableArray()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.managedObjectContext = appDelegate.managedObjectContext
+        super.init(coder: aDecoder)
+    }
+    
     @IBAction func editCategories(sender: AnyObject) {
         self.editing = !self.editing
         
@@ -20,12 +32,24 @@ class CategoryListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+         let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("Reminder", inManagedObjectContext:self.managedObjectContext)
+        fetchRequest.entity = entityDescription
+         var result = NSArray?()
+        do {
+            result = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            if result!.count == 0 {
+                self.currentCategory = Category.init(entity: NSEntityDescription.entityForName("Category", inManagedObjectContext:
+                     self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
+            } else {
+                 self.currentCategory = result![0] as? Category
+            }
+        }
+        catch {
+              let fetchError = error as NSError
+             print(fetchError)
+         }
     }
 
     override func didReceiveMemoryWarning() {

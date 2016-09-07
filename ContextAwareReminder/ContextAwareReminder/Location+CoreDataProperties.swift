@@ -2,7 +2,7 @@
 //  Location+CoreDataProperties.swift
 //  ContextAwareReminder
 //
-//  Created by Zaeem Siddiq on 9/2/16.
+//  Created by Zaeem Siddiq on 9/7/16.
 //  Copyright © 2016 Zaeem Siddiq. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,11 +14,11 @@ import CoreData
 
 extension Location {
 
-    @NSManaged var name: String?
     @NSManaged var address: String?
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?
+    @NSManaged var name: String?
     @NSManaged var radius: NSNumber?
-    @NSManaged var belongsto: Category?
+    @NSManaged var belongsto: NSSet?
 
 }

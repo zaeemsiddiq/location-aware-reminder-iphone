@@ -1,8 +1,8 @@
 //
-//  Category+CoreDataProperties.swift
+//  Reminder+CoreDataProperties.swift
 //  ContextAwareReminder
 //
-//  Created by Zaeem Siddiq on 9/2/16.
+//  Created by Zaeem Siddiq on 9/7/16.
 //  Copyright © 2016 Zaeem Siddiq. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,13 +12,12 @@
 import Foundation
 import CoreData
 
-extension Category {
+extension Reminder {
 
+    @NSManaged var datetime: NSDate?
+    @NSManaged var note: String?
+    @NSManaged var status: NSNumber?
     @NSManaged var title: String?
-    @NSManaged var color: NSNumber?
-    @NSManaged var order: NSNumber?
-    @NSManaged var notification: NSNumber?
-    @NSManaged var location: NSSet?
-    @NSManaged var reminders: NSSet?
+    @NSManaged var belongsto: NSSet?
 
 }
