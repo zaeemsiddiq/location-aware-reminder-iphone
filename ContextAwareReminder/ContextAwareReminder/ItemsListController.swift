@@ -1,60 +1,37 @@
 //
-//  CategoryListController.swift
+//  ItemsListController.swift
 //  ContextAwareReminder
 //
-//  Created by Zaeem Siddiq on 9/1/16.
+//  Created by Zaeem Siddiq on 9/7/16.
 //  Copyright © 2016 Zaeem Siddiq. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class CategoryListController: UITableViewController, addCategoryDelegate {
+class ItemsListController: UITableViewController {
 
+    /*
     var managedObjectContext: NSManagedObjectContext
-    var categoryList: NSMutableArray
+    var itemsList: NSMutableArray
     var currentCategory: Category?
-    
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    /*
     required init?(coder aDecoder: NSCoder) {
-        categoryList = NSMutableArray()
+        itemsList = NSMutableArray()
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
         super.init(coder: aDecoder)
-    }
-    
-    @IBAction func editCategories(sender: AnyObject) {
-        self.editing = !self.editing
-        
-    }
-    @IBAction func rightBarButton(sender: AnyObject) {
-        self.performSegueWithIdentifier("GoToViewController", sender:self)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("Reminder", inManagedObjectContext:self.managedObjectContext)
-        fetchRequest.entity = entityDescription
-         var result = NSArray?()
-        do {
-            result = try self.managedObjectContext.executeFetchRequest(fetchRequest)
-            if result!.count == 0 {
-                self.currentCategory = Category.init(entity: NSEntityDescription.entityForName("Category", inManagedObjectContext:
-                     self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
-            } else {
-                 self.currentCategory = result![0] as? Category
-            }
-        }
-        catch {
-              let fetchError = error as NSError
-             print(fetchError)
-         }
-    }
-    
-    func addCategory(category: Category) {
-        
-    }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,17 +47,17 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return 5
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryListCell", forIndexPath: indexPath) as! CategoryListCell
-                // Configure the cell...
-
+        //let cell = tableView.dequeueReusableCellWithIdentifier("ItemsListCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("ItemsListCell", forIndexPath: indexPath) as! ItemListCell
+        // Configure the cell...
+        cell.itemTitle.text = "test"
+        cell.itemSwitch.on = false
         return cell
     }
-    
 
     
     // Override to support conditional editing of the table view.
@@ -88,6 +65,8 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         // Return false if you do not want the specified item to be editable.
         return true
     }
+    
+
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -98,12 +77,14 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+
     
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
 
     }
-    
+ 
+
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
@@ -111,7 +92,7 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
     }
     
 
-    
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

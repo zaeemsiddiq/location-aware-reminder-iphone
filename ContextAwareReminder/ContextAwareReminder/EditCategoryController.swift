@@ -10,6 +10,15 @@ import UIKit
 import MapKit
 
 class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
+    
+    
+    var cTitle: String?
+    var cDate: NSDate?
+    var cRadius: Double?
+    var cColor: Int?
+    var cNotification: Bool?
+    
+    let category = Category()
     let locationManager = CLLocationManager()
     @IBOutlet weak var categoryTitle: UITextField!
     @IBOutlet weak var categoryRadius: UITextField!
@@ -32,6 +41,8 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     @IBAction func categoryAddButton(sender: AnyObject) {
+        // add button tapped, time to make an object and send to list controller so that it can persist it to database and refresh the list.
+        
     }
 
     @IBAction func cancelButon(sender: AnyObject) {

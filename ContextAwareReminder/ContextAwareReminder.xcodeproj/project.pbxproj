@@ -18,6 +18,9 @@
 		B74D7B691D7F94A200111B95 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B631D7F94A200111B95 /* Category+CoreDataProperties.swift */; };
 		B74D7B6A1D7F94A200111B95 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B641D7F94A200111B95 /* Category.swift */; };
 		B74D7B701D7FFBE500111B95 /* EditCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B6F1D7FFBE500111B95 /* EditCategoryController.swift */; };
+		B74D7B721D8010A100111B95 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B711D8010A100111B95 /* Protocols.swift */; };
+		B74D7B741D801E1B00111B95 /* ItemsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B731D801E1B00111B95 /* ItemsListController.swift */; };
+		B74D7B9F1D803CE000111B95 /* ItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B9E1D803CE000111B95 /* ItemListCell.swift */; };
 		B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C41D7593E6008886D0 /* AppDelegate.swift */; };
 		B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3C61D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld */; };
 		B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76FE3CB1D7593E6008886D0 /* DetailViewController.swift */; };
@@ -40,6 +43,9 @@
 		B74D7B631D7F94A200111B95 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B74D7B641D7F94A200111B95 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B74D7B6F1D7FFBE500111B95 /* EditCategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryController.swift; sourceTree = "<group>"; };
+		B74D7B711D8010A100111B95 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		B74D7B731D801E1B00111B95 /* ItemsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsListController.swift; sourceTree = "<group>"; };
+		B74D7B9E1D803CE000111B95 /* ItemListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListCell.swift; sourceTree = "<group>"; };
 		B76FE3C11D7593E6008886D0 /* ContextAwareReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContextAwareReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76FE3C41D7593E6008886D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B76FE3C71D7593E6008886D0 /* ContextAwareReminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContextAwareReminder.xcdatamodel; sourceTree = "<group>"; };
@@ -71,6 +77,8 @@
 				B74D7AE71D7835E500111B95 /* CategoryListController.swift */,
 				B74D7AE91D783B0500111B95 /* CategoryListCell.swift */,
 				B74D7B6F1D7FFBE500111B95 /* EditCategoryController.swift */,
+				B74D7B731D801E1B00111B95 /* ItemsListController.swift */,
+				B74D7B9E1D803CE000111B95 /* ItemListCell.swift */,
 			);
 			name = ViewControlllers;
 			sourceTree = "<group>";
@@ -85,6 +93,7 @@
 				B74D7B631D7F94A200111B95 /* Category+CoreDataProperties.swift */,
 				B74D7B641D7F94A200111B95 /* Category.swift */,
 				B74D7B151D79565100111B95 /* CategoryColor.swift */,
+				B74D7B711D8010A100111B95 /* Protocols.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -203,11 +212,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B74D7B721D8010A100111B95 /* Protocols.swift in Sources */,
+				B74D7B9F1D803CE000111B95 /* ItemListCell.swift in Sources */,
 				B76FE3C81D7593E6008886D0 /* ContextAwareReminder.xcdatamodeld in Sources */,
 				B74D7B701D7FFBE500111B95 /* EditCategoryController.swift in Sources */,
 				B74D7B681D7F94A200111B95 /* Location.swift in Sources */,
 				B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */,
 				B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */,
+				B74D7B741D801E1B00111B95 /* ItemsListController.swift in Sources */,
 				B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */,
 				B74D7B671D7F94A200111B95 /* Location+CoreDataProperties.swift in Sources */,
 				B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */,

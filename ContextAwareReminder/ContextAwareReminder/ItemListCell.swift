@@ -1,18 +1,18 @@
 //
-//  CategoryListCell.swift
+//  ItemListCell.swift
 //  ContextAwareReminder
 //
-//  Created by Zaeem Siddiq on 9/1/16.
+//  Created by Zaeem Siddiq on 9/7/16.
 //  Copyright © 2016 Zaeem Siddiq. All rights reserved.
 //
 
 import UIKit
 
-class CategoryListCell: UITableViewCell {
+class ItemListCell: UITableViewCell {
 
     
-    @IBOutlet weak var labelCategoryTotal: UILabel!
-    @IBOutlet weak var labelCategoryName: UILabel!
+    @IBOutlet weak var itemTitle: UILabel!
+    @IBOutlet weak var itemSwitch: UISwitch!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,5 +24,4 @@ class CategoryListCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
 }
