@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
@@ -18,11 +19,21 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
     var cColor: Int?
     var cNotification: Bool?
     
-    let category = Category()
+    var delegate: addCategoryDelegate?
+    var managedObjectContext: NSManagedObjectContext
+    
+    var category: Category?
+    var location: Location?
     let locationManager = CLLocationManager()
     @IBOutlet weak var categoryTitle: UITextField!
     @IBOutlet weak var categoryRadius: UITextField!
     @IBOutlet weak var categoryLocation: MKMapView!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.managedObjectContext = appDelegate.managedObjectContext
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,21 +44,61 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
         // Ask user for permission to use location
         // Uses description from NSLocationAlwaysUsageDescription in Info.plist
         locationManager.requestAlwaysAuthorization()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func categoryAddButton(sender: AnyObject) {
-        // add button tapped, time to make an object and send to list controller so that it can persist it to database and refresh the list.
+        
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(EditCategoryController.handleTap(_:)))
+        gestureRecognizer.delegate = self
+        categoryLocation.addGestureRecognizer(gestureRecognizer)
+        
+        if category == nil {    // means we are adding a new category, otherwise we are setting a new category
+           self.title = "Add Category"
+        } else {
+            self.title = "Edit Category"
+        }
+        
         
     }
 
-    @IBAction func cancelButon(sender: AnyObject) {
+    
+    @IBAction func categoryAddButton(sender: AnyObject) {
+        // add button tapped, time to make an object and send to list controller so that it can persist it to database and refresh the list by sending object through delegate.
+        if(delegate != nil) {
+            if category == nil {
+                self.category = Category.init(entity: NSEntityDescription.entityForName("Category", inManagedObjectContext:
+                     self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
+            }
+            
+            if location == nil {
+                self.location = Location.init(entity: NSEntityDescription.entityForName("Location", inManagedObjectContext:
+                    self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
+            }
+            category!.title = categoryTitle.text
+            
+            location?.latitude = -33.8688
+            location?.longitude = 151.2093
+            
+            category!.location = location
+            category!.color = 1
+            category!.order = 1
+            
+            do {
+                try self.managedObjectContext.save()
+            }
+            catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
+            
+            delegate?.addCategory(category!)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            //navigationController?.popViewControllerAnimated(true)   //jump back to the previous screen
+        }
+        
     }
     
+    @IBAction func btnCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     @IBAction func locationSearchButton(sender: AnyObject) {
     }
     /*
@@ -72,6 +123,48 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         categoryLocation.addAnnotation(annotation)
+    }
+    
+    
+    // MARK: MKMapViewDelegate
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        // Zoom to new user location when updated
+        var mapRegion = MKCoordinateRegion()
+        mapRegion.center = mapView.userLocation.coordinate
+        mapRegion.span = mapView.region.span; // Use current 'zoom'
+        mapView.setRegion(mapRegion, animated: true)
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        // Only show user location in MapView if user has authorized location tracking
+        categoryLocation.showsUserLocation = (status == .AuthorizedAlways)
+    }
+    
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("Entered region \(region.identifier)")
+        
+        // Notify the user when they have entered a region
+        let title = "Entered new region"
+        let message = "You have arrived at \(region.identifier)."
+        
+        if UIApplication.sharedApplication().applicationState == .Active {
+            // App is active, show an alert
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(alertAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // App is inactive, show a notification
+            let notification = UILocalNotification()
+            notification.alertTitle = title
+            notification.alertBody = message
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("Exited region \(region.identifier)")
     }
 
 }

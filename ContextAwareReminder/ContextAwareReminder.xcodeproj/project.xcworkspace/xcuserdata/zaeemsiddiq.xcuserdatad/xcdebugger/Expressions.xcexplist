@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "EditCategoryController.viewDidLoad() -&gt; ():EditCategoryController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EditCategoryController.categoryAddButton(AnyObject) -&gt; ():EditCategoryController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapsController.loadAnnotations() -&gt; ():MapsController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ContextAwareReminder.Category">
+            </PersistentString>
+            <PersistentString
+               value = "(ContextAwareReminder.Category)category">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():CategoryListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.viewDidLoad() -&gt; ():CategoryListController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

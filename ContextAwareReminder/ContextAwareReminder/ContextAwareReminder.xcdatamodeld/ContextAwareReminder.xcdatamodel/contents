@@ -5,7 +5,7 @@
         <attribute name="notification" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="belongsto" inverseEntity="Location" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="belongsto" inverseEntity="Location" syncable="YES"/>
         <relationship name="reminders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reminder" inverseName="belongsto" inverseEntity="Reminder" syncable="YES"/>
     </entity>
     <entity name="Event">
@@ -30,9 +30,9 @@
         <relationship name="belongsto" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="reminders" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="261" positionY="198" width="128" height="135"/>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
-        <element name="Location" positionX="270" positionY="234" width="128" height="135"/>
-        <element name="Reminder" positionX="288" positionY="270" width="128" height="120"/>
+        <element name="Category" positionX="-56" positionY="72" width="128" height="135"/>
+        <element name="Event" positionX="243" positionY="45" width="128" height="60"/>
+        <element name="Location" positionX="313" positionY="108" width="128" height="135"/>
+        <element name="Reminder" positionX="288" positionY="342" width="128" height="120"/>
     </elements>
 </model>
