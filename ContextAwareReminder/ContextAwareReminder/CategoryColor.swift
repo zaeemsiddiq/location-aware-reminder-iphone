@@ -8,10 +8,8 @@
 
 import UIKit
 
-enum CategoryColor: String {
+enum CategoryColor: Int {
     case Blue, Red
-    
-    
     var color: UIColor{
         switch self {
         case .Blue:

@@ -20,5 +20,10 @@ extension Category {
     @NSManaged var title: String?
     @NSManaged var location: Location?
     @NSManaged var reminders: NSSet?
+    
+    func addReminder (reminder: Reminder) {
+        let mon = self.mutableSetValueForKey("reminders")
+        mon.addObject(reminder)
+    }
 
 }

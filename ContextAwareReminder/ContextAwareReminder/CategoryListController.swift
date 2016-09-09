@@ -22,6 +22,9 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         super.init(coder: aDecoder)
     }
     
+    @IBAction func editButton(sender: AnyObject) {
+        self.editing = !self.editing
+    }
     @IBAction func addCategoryButton(sender: AnyObject) {
         //self.performSegueWithIdentifier("editCategorySegue", sender:self)
     }
@@ -140,17 +143,17 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "editCategorySegue" {
+        if segue.identifier == "addCategorySegue" {
             let editCategorySegue:EditCategoryController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! EditCategoryController
             editCategorySegue.delegate = self
             editCategorySegue.managedObjectContext = self.managedObjectContext
+        }
+        if segue.identifier == "viewCategorySegue" {
+            let itemsListSegue:ItemsListController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! ItemsListController
             if let selectedReminderCell = sender as? CategoryListCell {
                 let indexPath = tableView.indexPathForCell(selectedReminderCell)!
+                itemsListSegue.currentCategory = self.categoryList.objectAtIndex(indexPath.row) as? Category
             }
-            
-        }
-        if segue.identifier == "ident" {
-            let itemsListSegue:ItemsListController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! ItemsListController
            
         }
     }

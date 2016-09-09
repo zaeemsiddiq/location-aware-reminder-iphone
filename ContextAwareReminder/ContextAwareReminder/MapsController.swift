@@ -12,6 +12,8 @@ import MapKit
 
 class MapsController:UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
+    var circle:MKCircle!
+    
     let locationManager = CLLocationManager()
     
     var managedObjectContext: NSManagedObjectContext
@@ -22,7 +24,7 @@ class MapsController:UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        // Do any additional setup after loading the view.
+        mapView.delegate = self // listening passing self object so that mapview can talk to its delegates which are implemented in this controller
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,12 +33,8 @@ class MapsController:UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         self.managedObjectContext = appDelegate.managedObjectContext
         super.init(coder: aDecoder)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    // this method loads the category list from core date and saves into local category list array
     func loadData() {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext)
@@ -62,22 +60,38 @@ class MapsController:UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         }
     }
     
+    // this method itereates through all the loaded categories and adds annotations onto the map
     func loadAnnotations() {
         for category in (categoryList as NSArray as! [Category]) {
-            let location = (name: category.title,
-                            coordinate:CLLocationCoordinate2D(latitude: Double(category.location!.latitude!),
-                                longitude: Double(category.location!.longitude!)))
-            let mapAnnotation = MKPointAnnotation()
-            mapAnnotation.coordinate = location.coordinate
-            mapAnnotation.title = location.name
-            mapView.addAnnotation(mapAnnotation)
-            
-            // Using 1000 metre radius from center of location
-            let geofence = CLCircularRegion(center: location.coordinate, radius: 1000, identifier: location.name!)
-            locationManager.startMonitoringForRegion(geofence)
+            if category.location != nil { // checking if the location is not nil
+                let location = (name: category.title,
+                                coordinate:CLLocationCoordinate2D(latitude: Double(category.location!.latitude!),
+                                    longitude: Double(category.location!.longitude!)))
+                let mapAnnotation = MKPointAnnotation()
+                mapAnnotation.title = category.title
+                mapAnnotation.coordinate = location.coordinate
+                mapAnnotation.title = location.name
+                mapView.addAnnotation(mapAnnotation)
+                
+                circle = MKCircle(centerCoordinate: location.coordinate, radius: Double (category.location!.radius!) )
+                self.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 7, longitudeDelta: 7)), animated: true)
+                self.mapView.addOverlay(circle)
+                
+                // Using 1000 metre radius from center of location
+                let geofence = CLCircularRegion(center: location.coordinate, radius: 1000, identifier: location.name!)
+                locationManager.startMonitoringForRegion(geofence)
+            }
         }
     }
     
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay)
+        circleRenderer.fillColor = UIColor.blueColor().colorWithAlphaComponent(0.1)
+        circleRenderer.strokeColor = UIColor.blueColor()
+        circleRenderer.lineWidth = 1
+        return circleRenderer
+    }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
     }

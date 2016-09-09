@@ -30,6 +30,8 @@
 		B788DEEE1D80CFBD0040D214 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B788DEEC1D80CFBD0040D214 /* Category.swift */; };
 		B788DEF21D812DD50040D214 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B788DEF11D812DD50040D214 /* Constants.swift */; };
 		B788DEF41D82AADB0040D214 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B788DEF31D82AADB0040D214 /* TabBarController.swift */; };
+		B788DEF61D82B6F60040D214 /* AddLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B788DEF51D82B6F60040D214 /* AddLocationController.swift */; };
+		B788DEF81D82D26C0040D214 /* EditReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B788DEF71D82D26C0040D214 /* EditReminderController.swift */; };
 		B7F41E0E1D7705C10035296B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41E0D1D7705C10035296B /* MapKit.framework */; };
 		B7F41E101D7705D10035296B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F41E0F1D7705D10035296B /* CoreData.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		B788DEEC1D80CFBD0040D214 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../Category.swift; sourceTree = "<group>"; };
 		B788DEF11D812DD50040D214 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B788DEF31D82AADB0040D214 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		B788DEF51D82B6F60040D214 /* AddLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationController.swift; sourceTree = "<group>"; };
+		B788DEF71D82D26C0040D214 /* EditReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditReminderController.swift; sourceTree = "<group>"; };
 		B7F41E0D1D7705C10035296B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B7F41E0F1D7705D10035296B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -87,6 +91,8 @@
 				B74D7B9E1D803CE000111B95 /* ItemListCell.swift */,
 				B788DEE91D80C6710040D214 /* MapsController.swift */,
 				B788DEF31D82AADB0040D214 /* TabBarController.swift */,
+				B788DEF51D82B6F60040D214 /* AddLocationController.swift */,
+				B788DEF71D82D26C0040D214 /* EditReminderController.swift */,
 			);
 			name = ViewControlllers;
 			sourceTree = "<group>";
@@ -232,10 +238,12 @@
 				B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */,
 				B74D7B741D801E1B00111B95 /* ItemsListController.swift in Sources */,
 				B788DEED1D80CFBD0040D214 /* Category+CoreDataProperties.swift in Sources */,
+				B788DEF81D82D26C0040D214 /* EditReminderController.swift in Sources */,
 				B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */,
 				B74D7B671D7F94A200111B95 /* Location+CoreDataProperties.swift in Sources */,
 				B788DEF41D82AADB0040D214 /* TabBarController.swift in Sources */,
 				B76FE3C51D7593E6008886D0 /* AppDelegate.swift in Sources */,
+				B788DEF61D82B6F60040D214 /* AddLocationController.swift in Sources */,
 				B76FE3CC1D7593E6008886D0 /* DetailViewController.swift in Sources */,
 				B788DEEA1D80C6710040D214 /* MapsController.swift in Sources */,
 				B74D7B661D7F94A200111B95 /* Reminder.swift in Sources */,

@@ -24,6 +24,7 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     var category: Category?
     var location: Location?
+    var totalCategories: Int = 0
     let locationManager = CLLocationManager()
     @IBOutlet weak var categoryTitle: UITextField!
     @IBOutlet weak var categoryRadius: UITextField!
@@ -44,7 +45,6 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
         // Ask user for permission to use location
         // Uses description from NSLocationAlwaysUsageDescription in Info.plist
         locationManager.requestAlwaysAuthorization()
-        
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(EditCategoryController.handleTap(_:)))
         gestureRecognizer.delegate = self
@@ -79,7 +79,7 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
             
             category!.location = location
             category!.color = 1
-            category!.order = 1
+            category!.order = self.totalCategories+1
             
             do {
                 try self.managedObjectContext.save()
@@ -165,6 +165,15 @@ class EditCategoryController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("Exited region \(region.identifier)")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addLocationSegue" {
+            let addLocationSegue:EditCategoryController = segue.destinationViewController as! EditCategoryController
+            addLocationSegue.managedObjectContext = self.managedObjectContext
+            
+            
+        }
     }
 
 }

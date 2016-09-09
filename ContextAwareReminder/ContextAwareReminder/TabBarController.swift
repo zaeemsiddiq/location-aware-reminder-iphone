@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.navigationBarHidden = true  // as it overlaps its children navigation bars thats y i had to programatically hide it
     }
 
     override func didReceiveMemoryWarning() {
