@@ -8,17 +8,25 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 import MapKit
 
 class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate{
 
+    @IBOutlet weak var reminderSwitch: UISwitch!
+    @IBOutlet weak var locationName: UISearchBar!
+    @IBOutlet weak var mapView: MKMapView!
     var location: Location?
     var managedObjectContext: NSManagedObjectContext
     var annotationAdded: Bool = false
     
+    var delegate: EditCategoryController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // Setup delegation so we can respond to MapView and LocationManager events
+        mapView.delegate = self
+        
         if(self.location == nil) {
             self.location = Location.init(entity: NSEntityDescription.entityForName("Location", inManagedObjectContext:
                 self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
@@ -36,16 +44,34 @@ class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationMana
     
     @IBAction func buttonDone(sender: AnyObject) {
         
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        
+        // converting address to lat long cordinates
+        //http://stackoverflow.com/questions/24706885/how-can-i-plot-addresses-in-swift-converting-address-to-longitude-and-latitude
+        let address = locationName.text
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address!, completionHandler: {(placemarks, error) -> Void in
+            if((error) != nil) { 
+                print("Error", error)
+            }
+            if let placemark = placemarks?.first {
+                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                let mapAnnotation = MKPointAnnotation()
+                mapAnnotation.coordinate = coordinates
+                self.mapView.addAnnotation(mapAnnotation)
+                
+                self.location?.latitude = coordinates.latitude
+                self.location?.longitude = coordinates.longitude
+                self.location?.name = placemark.name
+                self.location?.address = self.locationName.text
+                if self.reminderSwitch.on {
+                    self.location?.notify = 1
+                } else {
+                    self.location?.notify = 0
+                }
+                self.delegate?.addLocation(self.location!)
+            }
+        })
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

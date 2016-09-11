@@ -19,6 +19,7 @@ extension Location {
     @NSManaged var longitude: NSNumber?
     @NSManaged var name: String?
     @NSManaged var radius: NSNumber?
+    @NSManaged var notify: NSNumber?
     @NSManaged var belongsto: NSSet?
 
 }

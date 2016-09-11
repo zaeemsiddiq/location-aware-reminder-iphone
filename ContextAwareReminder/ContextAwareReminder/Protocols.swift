@@ -13,3 +13,7 @@ protocol addCategoryDelegate {
 protocol addReminderDelegate {
     func addReminder(reminder: Reminder)
 }
+
+protocol addLocationDelegate {
+    func addLocation( location: Location)
+}

@@ -49,30 +49,47 @@ class ItemsListController: UITableViewController, addReminderDelegate {
 
     func addReminder(reminder: Reminder) {
         self.currentCategory?.addReminder(reminder)
-        
+        do
+        {
+            try self.managedObjectContext.save()
+            self.remindersList = NSMutableArray(array: (currentCategory!.reminders?.allObjects as! [Reminder]))
+        }
+        catch let error
+        {
+            print("Could not save \(error)")
+        }
         // refresh the list here
         refreshList()
     }
     
     func refreshList() {
-        self.remindersList = NSMutableArray(array: (currentCategory!.reminders?.allObjects as! [Reminder]))
-        self.tableView.reloadData()
-        //Save the ManagedObjectContext
-        do
-        {
-            try self.managedObjectContext.save()
-        }
-        catch let error
-        {
-            print("Could not save Deletion \(error)")
-        }
+            self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+         
+        // #warning Incomplete implementation, return the number of sections
+        var numOfSections: Int = 0
+        if self.remindersList.count == 0
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text             = "No items to display"
+            noDataLabel.textColor        = UIColor.blackColor()
+            noDataLabel.textAlignment    = .Center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
+        else
+        {
+            tableView.separatorStyle = .SingleLine
+            numOfSections                = 1
+            tableView.backgroundView = nil
+            
+        }
+        return numOfSections
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

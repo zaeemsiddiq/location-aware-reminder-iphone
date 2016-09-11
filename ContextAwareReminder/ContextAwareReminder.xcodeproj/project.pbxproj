@@ -10,7 +10,6 @@
 		B74D7AE81D7835E500111B95 /* CategoryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE71D7835E500111B95 /* CategoryListController.swift */; };
 		B74D7AEA1D783B0500111B95 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7AE91D783B0500111B95 /* CategoryListCell.swift */; };
 		B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B131D7853ED00111B95 /* DatabaseService.swift */; };
-		B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B151D79565100111B95 /* CategoryColor.swift */; };
 		B74D7B651D7F94A200111B95 /* Reminder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B5F1D7F94A200111B95 /* Reminder+CoreDataProperties.swift */; };
 		B74D7B661D7F94A200111B95 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B601D7F94A200111B95 /* Reminder.swift */; };
 		B74D7B671D7F94A200111B95 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D7B611D7F94A200111B95 /* Location+CoreDataProperties.swift */; };
@@ -40,7 +39,6 @@
 		B74D7AE71D7835E500111B95 /* CategoryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListController.swift; sourceTree = "<group>"; };
 		B74D7AE91D783B0500111B95 /* CategoryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
 		B74D7B131D7853ED00111B95 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
-		B74D7B151D79565100111B95 /* CategoryColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
 		B74D7B5F1D7F94A200111B95 /* Reminder+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reminder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B74D7B601D7F94A200111B95 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		B74D7B611D7F94A200111B95 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				B74D7B601D7F94A200111B95 /* Reminder.swift */,
 				B74D7B611D7F94A200111B95 /* Location+CoreDataProperties.swift */,
 				B74D7B621D7F94A200111B95 /* Location.swift */,
-				B74D7B151D79565100111B95 /* CategoryColor.swift */,
 				B74D7B711D8010A100111B95 /* Protocols.swift */,
 				B788DEF11D812DD50040D214 /* Constants.swift */,
 			);
@@ -235,7 +232,6 @@
 				B74D7B681D7F94A200111B95 /* Location.swift in Sources */,
 				B788DEEE1D80CFBD0040D214 /* Category.swift in Sources */,
 				B74D7B141D7853ED00111B95 /* DatabaseService.swift in Sources */,
-				B74D7B161D79565100111B95 /* CategoryColor.swift in Sources */,
 				B74D7B741D801E1B00111B95 /* ItemsListController.swift in Sources */,
 				B788DEED1D80CFBD0040D214 /* Category+CoreDataProperties.swift in Sources */,
 				B788DEF81D82D26C0040D214 /* EditReminderController.swift in Sources */,

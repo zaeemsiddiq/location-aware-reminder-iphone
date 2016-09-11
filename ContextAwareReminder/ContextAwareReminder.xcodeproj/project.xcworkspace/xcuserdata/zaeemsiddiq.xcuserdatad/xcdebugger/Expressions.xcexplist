@@ -3,10 +3,34 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "EditCategoryController.viewDidLoad() -&gt; ():EditCategoryController.swift">
+         contextName = "ItemsListController.addReminder(Reminder) -&gt; ():ItemsListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.longPress(UILongPressGestureRecognizer) -&gt; ():CategoryListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.viewDidLoad() -&gt; ():CategoryListController.swift">
       </ContextState>
       <ContextState
          contextName = "EditCategoryController.categoryAddButton(AnyObject) -&gt; ():EditCategoryController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EditCategoryController.viewDidLoad() -&gt; ():EditCategoryController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddLocationController.buttonDone(AnyObject) -&gt; ():AddLocationController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.tableView(UITableView, moveRowAtIndexPath : NSIndexPath, toIndexPath : NSIndexPath) -&gt; ():CategoryListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ItemsListController.refreshList() -&gt; ():ItemsListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.numberOfSectionsInTableView(UITableView) -&gt; Int:CategoryListController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CategoryListController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():CategoryListController.swift">
       </ContextState>
       <ContextState
          contextName = "MapsController.loadAnnotations() -&gt; ():MapsController.swift">
@@ -20,10 +44,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CategoryListController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():CategoryListController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "CategoryListController.viewDidLoad() -&gt; ():CategoryListController.swift">
+         contextName = "AddLocationController.(buttonDone(AnyObject) -&gt; ()).(closure #1):AddLocationController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

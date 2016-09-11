@@ -14,6 +14,7 @@ class EditReminderController: UIViewController {
     @IBOutlet weak var reminderTitleText: UITextField!
     @IBOutlet weak var reminderNoteText: UITextView!
     @IBOutlet weak var reminderDateText: UIDatePicker!
+    var isvalid: Bool = false
     
     var delegate: ItemsListController?
     var currentReminder: Reminder?
@@ -52,6 +53,17 @@ class EditReminderController: UIViewController {
         delegate?.addReminder(currentReminder!)
         
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func isValid() -> Bool {
+        isvalid = true
+        if ((reminderTitleText.text?.isEmpty) != nil) {
+            
+        } else {
+            isvalid=false
+        }
+        
+        return isvalid
     }
 
     @IBAction func buttonCancel(sender: AnyObject) {

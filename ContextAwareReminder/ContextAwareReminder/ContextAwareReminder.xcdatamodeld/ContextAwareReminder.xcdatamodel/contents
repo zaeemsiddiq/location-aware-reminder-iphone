@@ -19,12 +19,14 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notify" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="belongsto" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="location" inverseEntity="Category" syncable="YES"/>
     </entity>
     <entity name="Reminder" representedClassName=".Reminder" syncable="YES">
         <attribute name="datetime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notify" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="belongsto" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="reminders" inverseEntity="Category" syncable="YES"/>
@@ -32,7 +34,7 @@
     <elements>
         <element name="Category" positionX="-56" positionY="72" width="128" height="135"/>
         <element name="Event" positionX="243" positionY="45" width="128" height="60"/>
-        <element name="Location" positionX="313" positionY="108" width="128" height="135"/>
-        <element name="Reminder" positionX="288" positionY="342" width="128" height="120"/>
+        <element name="Location" positionX="313" positionY="108" width="128" height="150"/>
+        <element name="Reminder" positionX="288" positionY="342" width="128" height="135"/>
     </elements>
 </model>
