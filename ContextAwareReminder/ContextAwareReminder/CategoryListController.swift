@@ -11,11 +11,12 @@ import CoreData
 
 class CategoryListController: UITableViewController, addCategoryDelegate {
 
-    var managedObjectContext: NSManagedObjectContext
-    var categoryList: NSMutableArray
-    var currentCategory: Category?
-    var longPressRecognizer: UIGestureRecognizer?
+    var managedObjectContext: NSManagedObjectContext    // used to handle transactions
+    var categoryList: NSMutableArray    // array holding the list
+    var currentCategory: Category?  // var holding the selected category
+    var longPressRecognizer: UIGestureRecognizer?   // used to handle category edit function
     
+    // setting up the environment
     required init?(coder aDecoder: NSCoder) {
         categoryList = NSMutableArray()
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -23,6 +24,7 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         super.init(coder: aDecoder)
     }
     
+    // if the mode is set to editting, i removed the long pressed gesture because it initiated the edit cat procedure, added back again if the table gets back from editting mode
     @IBAction func editButton(sender: AnyObject) {
         self.editing = !self.editing
         if (self.editing) {
@@ -32,7 +34,7 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         }
     }
     @IBAction func addCategoryButton(sender: AnyObject) {
-        //self.performSegueWithIdentifier("editCategorySegue", sender:self)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,7 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
     }
     
     // code for controlling the long tap, taken from http://stackoverflow.com/questions/30839275/how-to-select-a-table-row-during-a-long-press-in-swift
+    // this code returns the table row as index then we can send that object to edit category view
     func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if !self.editing {
             if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
@@ -59,11 +62,13 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         }
         
     }
-    
+    // delegate returned from edit cat screen , not that the category is added in the edit screen thats why we are just refreshing the list here
     func addCategory(category: Category) {  // refresh the list here
         loadData()
     }
     
+    
+    // loading the data into our category list here
     func loadData() {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext)
@@ -94,23 +99,6 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        var numOfSections: Int = 0
-        /*if self.categoryList.count == 0
-        {
-            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
-            noDataLabel.text             = "No items to display"
-            noDataLabel.textColor        = UIColor.blackColor()
-            noDataLabel.textAlignment    = .Center
-            tableView.backgroundView = noDataLabel
-            tableView.separatorStyle = .None
-        }
-        else
-        {
-            tableView.separatorStyle = .SingleLine
-            numOfSections                = 1
-            tableView.backgroundView = nil
-           
-        }*/
         return 1
     }
 
@@ -118,6 +106,8 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         // #warning Incomplete implementation, return the number of rows
         return self.categoryList.count
     }
+    
+    // we are sorting on the basis of order here. An item of order 1 will always be displayed before the one with order 4 .
     func sortList() {
         self.categoryList.sortUsingComparator{
             
@@ -129,24 +119,10 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
             let result = p1.order!.compare(p2.order!)
             return result
         }
-        //self.categoryList = tempArr
-        print("printing sorted array \(categoryList.count)")
-        if categoryList.count != 0 {
-            for index in 0...categoryList.count-1 {
-                let walkerCat: Category = categoryList.objectAtIndex(index) as! Category
-                print("name = \(walkerCat.title) order = \(walkerCat.order) ")
-            }
-        }
-        
         tableView.reloadData()
     }
+    // this function gets fired when we are editing the order of the table, The algorithm works in such a way that it detects whether we are promoting or demoting a category. Promotion sets indexes from top to bottom whereas demotion sets indexes from bottom to up
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        
-        print("from \(fromIndexPath.row) to \(toIndexPath.row)")
-        
-        
-        
-        
         
         if toIndexPath.row < fromIndexPath.row {    // from below to above (promotion)
             
@@ -171,27 +147,22 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
             }
             
         } else {    // demotion
-            
             // assign fromms order to to index
             let fromCat: Category = self.categoryList.objectAtIndex(fromIndexPath.row) as! Category
             fromCat.order = toIndexPath.row
             
             //start decrementing all the above orders with 1
-            
             for var index = toIndexPath.row; index >= fromIndexPath.row; index -= 1 {
-                
                 if index == fromIndexPath.row {
                     // ignore as we have already changed the index above
                 } else {
                         let walkerCat: Category = self.categoryList.objectAtIndex(index) as! Category
                         walkerCat.order = index-1
-                    
                 }
             }
-            
         }
         
-        //Save the ManagedObjectContext
+        //Save the ManagedObjectContext after the orders have been set
         do
         {
             try self.managedObjectContext.save()
@@ -199,9 +170,9 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         catch let error {
             print("Could not save Deletion \(error)")
         }
+        // sort and display
         sortList()
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryListCell", forIndexPath: indexPath) as! CategoryListCell
@@ -210,24 +181,22 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         cell.labelCategoryName.text = cat.title
         
         if cat.color == Constants.COLOR_RED {
-            cell.backgroundColor = UIColor.redColor()
+            cell.labelCategoryName.textColor = UIColor.redColor()
         } else if cat.color == Constants.COLOR_ORANGE {
-            cell.backgroundColor = UIColor.orangeColor()
+            cell.labelCategoryName.textColor = UIColor.orangeColor()
         } else if cat.color == Constants.COLOR_YELLOW {
-            cell.backgroundColor = UIColor.yellowColor()
+            cell.labelCategoryName.textColor = UIColor.yellowColor()
         } else if cat.color == Constants.COLOR_GREEN {
-            cell.backgroundColor = UIColor.greenColor()
+            cell.labelCategoryName.textColor = UIColor.greenColor()
         } else if cat.color == Constants.COLOR_BLUE {
-            cell.backgroundColor = UIColor.blueColor()
+            cell.labelCategoryName.textColor = UIColor.blueColor()
         } else if cat.color == Constants.COLOR_PURPLE {
-            cell.backgroundColor = UIColor.purpleColor()
+            cell.labelCategoryName.textColor = UIColor.purpleColor()
         } else if cat.color == Constants.COLOR_GREY {
-            cell.backgroundColor = UIColor.grayColor()
+            cell.labelCategoryName.textColor = UIColor.grayColor()
         }
         return cell
     }
-    
-
     
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -263,15 +232,14 @@ class CategoryListController: UITableViewController, addCategoryDelegate {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        // add category segue jumps to EditCategoryController but without an object set to it, whereas view cat sets current object because we want to view in the same screen we are adding. similarly editting does the same function (sets the object before jumping to that screen)
         if segue.identifier == "addCategorySegue" {
             let editCategorySegue:EditCategoryController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! EditCategoryController
             editCategorySegue.delegate = self

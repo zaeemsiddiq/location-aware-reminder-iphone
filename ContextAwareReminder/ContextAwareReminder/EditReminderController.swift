@@ -20,7 +20,6 @@ class EditReminderController: UIViewController {
     var currentReminder: Reminder?
     var managedObjectContext: NSManagedObjectContext?
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -33,6 +32,8 @@ class EditReminderController: UIViewController {
             self.title = "Add Reminder"
         } else {
             self.title = "View Reminder"
+            reminderTitleText.text = currentReminder?.title
+            reminderNoteText.text = currentReminder?.note
             if let unwrappedDate = currentReminder?.datetime! {
                 reminderDateText.setDate(unwrappedDate, animated: false)
             }
@@ -46,20 +47,24 @@ class EditReminderController: UIViewController {
     }
     
     @IBAction func buttonDone(sender: AnyObject) {
+        
         currentReminder?.title = reminderTitleText.text
         currentReminder?.note = reminderNoteText.text
         currentReminder?.datetime = reminderDateText.date
-        currentReminder?.status = 1
+        currentReminder?.status = 0
         delegate?.addReminder(currentReminder!)
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func isValid() -> Bool {
+        var title: String? = "Error"
+        var errorMessage: String? = "Following fileds are required \n"
         isvalid = true
         if ((reminderTitleText.text?.isEmpty) != nil) {
             
         } else {
+            errorMessage = "Title"
             isvalid=false
         }
         

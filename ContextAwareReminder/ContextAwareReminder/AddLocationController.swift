@@ -11,12 +11,13 @@ import CoreData
 import CoreLocation
 import MapKit
 
-class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate{
+class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var reminderSwitch: UISwitch!
     @IBOutlet weak var locationName: UISearchBar!
     @IBOutlet weak var mapView: MKMapView!
     var location: Location?
+    var currentCategory: Category?
     var managedObjectContext: NSManagedObjectContext
     var annotationAdded: Bool = false
     
@@ -26,24 +27,41 @@ class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationMana
         super.viewDidLoad()
         // Setup delegation so we can respond to MapView and LocationManager events
         mapView.delegate = self
+        locationName.delegate = self
         
         if(self.location == nil) {
             self.location = Location.init(entity: NSEntityDescription.entityForName("Location", inManagedObjectContext:
                 self.managedObjectContext)!, insertIntoManagedObjectContext: self.managedObjectContext)
+        } else {
+            populateForm()
         }
     }
-
     required init?(coder aDecoder: NSCoder) {
-        self.managedObjectContext = NSManagedObjectContext()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.managedObjectContext = appDelegate.managedObjectContext
         super.init(coder: aDecoder)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func populateForm() {
+        if location?.notify == 1 {
+            reminderSwitch.setOn(true, animated: true)
+        } else {
+            reminderSwitch.setOn(false, animated: true)
+        }
+        if location?.address != "" {
+            locationName.text = location?.address
+        }
+        if location != nil {
+            let location = (name: self.location?.name,
+                            coordinate:CLLocationCoordinate2D(latitude: Double(self.location!.latitude!),
+                                longitude: Double(self.location!.longitude!)))
+            let mapAnnotation = MKPointAnnotation()
+            mapAnnotation.title = self.location?.name
+            mapAnnotation.coordinate = location.coordinate
+            mapAnnotation.title = location.name
+            mapView.addAnnotation(mapAnnotation)
+        }
     }
-    
-    @IBAction func buttonDone(sender: AnyObject) {
-        
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
         
@@ -52,7 +70,7 @@ class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationMana
         let address = locationName.text
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks, error) -> Void in
-            if((error) != nil) { 
+            if((error) != nil) {
                 print("Error", error)
             }
             if let placemark = placemarks?.first {
@@ -65,13 +83,28 @@ class AddLocationController: UIViewController, MKMapViewDelegate, CLLocationMana
                 self.location?.longitude = coordinates.longitude
                 self.location?.name = placemark.name
                 self.location?.address = self.locationName.text
-                if self.reminderSwitch.on {
-                    self.location?.notify = 1
-                } else {
-                    self.location?.notify = 0
-                }
-                self.delegate?.addLocation(self.location!)
             }
         })
     }
+
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func buttonDone(sender: AnyObject) {
+        if self.reminderSwitch.on {
+            self.location?.notify = 1
+        } else {
+            self.location?.notify = 0
+        }
+        self.delegate?.addLocation(self.location!)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func buttonCancel(sender: AnyObject) {
+         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

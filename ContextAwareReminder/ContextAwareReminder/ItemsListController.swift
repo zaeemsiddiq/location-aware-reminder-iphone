@@ -12,13 +12,12 @@ import CoreData
 class ItemsListController: UITableViewController, addReminderDelegate {
 
     var managedObjectContext: NSManagedObjectContext
-    var remindersList: NSMutableArray
+    var remindersList: NSMutableArray   // holds the items
     var currentCategory: Category?
     var currentReminder: Reminder?
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.navigationBarHidden = false  // as it overlaps its children navigation bars thats y i had to programatically hide it
     }
     
@@ -33,63 +32,64 @@ class ItemsListController: UITableViewController, addReminderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshList()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        sort()
     }
-    /*
-    required init?(coder aDecoder: NSCoder) {
-        itemsList = NSMutableArray()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.managedObjectContext = appDelegate.managedObjectContext
-        super.init(coder: aDecoder)
-    }*/
-
+    
+    // adding the reminder from EditReminder View
     func addReminder(reminder: Reminder) {
         self.currentCategory?.addReminder(reminder)
         do
         {
             try self.managedObjectContext.save()
-            self.remindersList = NSMutableArray(array: (currentCategory!.reminders?.allObjects as! [Reminder]))
         }
         catch let error
         {
-            print("Could not save \(error)")
+            print("Could not save Deletion \(error)")
         }
         // refresh the list here
         refreshList()
+        sort()
     }
     
+    // refresh the lost here, based on the contents, display an appropriate message otherwise just load the contents
     func refreshList() {
-            self.tableView.reloadData()
-    }
-    
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-         
-        // #warning Incomplete implementation, return the number of sections
-        var numOfSections: Int = 0
-        if self.remindersList.count == 0
-        {
+        // code taken from http://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen
+        
+        // we are just adding a text label, so that we can display an appropriate message instead of tableView
+        if(currentCategory == nil) {
+            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text             = "Please select a category do display its items"
+            noDataLabel.textColor        = UIColor.blackColor()
+            noDataLabel.textAlignment    = .Center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        } else if (currentCategory?.reminders?.count == 0) {
             let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
             noDataLabel.text             = "No items to display"
             noDataLabel.textColor        = UIColor.blackColor()
             noDataLabel.textAlignment    = .Center
             tableView.backgroundView = noDataLabel
             tableView.separatorStyle = .None
+        } else {
+            self.remindersList = NSMutableArray(array: (currentCategory!.reminders?.allObjects as! [Reminder]))
+            self.tableView.reloadData()
         }
-        else
-        {
-            tableView.separatorStyle = .SingleLine
-            numOfSections                = 1
-            tableView.backgroundView = nil
-            
-        }
-        return numOfSections
+        
+    }
+    
+    // sorting on the basis of date set
+    func sort() {
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
+        let arr = self.remindersList.sort {($0.valueForKey("datetime") as! NSDate).compare($1.valueForKey("datetime") as! NSDate) == .OrderedDescending }
+        self.remindersList = arr as! NSMutableArray
+        self.tableView.reloadData()
+    }
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,15 +100,38 @@ class ItemsListController: UITableViewController, addReminderDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("ItemsListCell", forIndexPath: indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemsListCell", forIndexPath: indexPath) as! ItemListCell
-        // Configure the cell...
+        // Configuring the cell...
+        // here i am adding a touch event listener to my switch which will initiate method to save enabled and disabled variables
+        // code taken from http://stackoverflow.com/questions/24814646/attach-parameter-to-button-addtarget-action-in-swift
+        // i am setting the selector tag as indexpath.row so that when the switches state is changed, we get the tag as row number from the switch
+        
         let rem: Reminder = self.remindersList[indexPath.row] as! Reminder
+        
+        // comparing the reminders time with todays time, NOTE that we are comparing to the HOUR level, changing the color to red code is taken from
+        //http://stackoverflow.com/questions/24577087/comparing-nsdates-without-time-component
+        let now = NSDate()
+        
+        let order = NSCalendar.currentCalendar().compareDate(now, toDate: rem.datetime!,
+                                                             toUnitGranularity: .Hour)
+        switch order {
+        case .OrderedDescending:    // overdue
+            cell.itemTitle.textColor = UIColor.redColor()
+        case .OrderedAscending:     // yet to come
+            print("ASCENDING")
+        case .OrderedSame:
+           cell.itemTitle.textColor = UIColor.redColor()
+        }
+        
         cell.itemTitle.text = rem.title
+        
+        // setting the item switch and attaching the listener to it
         cell.itemSwitch.tag = indexPath.row
         cell.itemSwitch.addTarget(self, action: #selector(ItemsListController.switchChanged(_:)), forControlEvents:UIControlEvents.AllTouchEvents)
         cell.itemSwitch.setOn((rem.status == 1 ? true: false), animated: true) // as it is NSNumber so 1 translates to T and F otherwise
         return cell
     }
 
+    // function gets fired when we change a position of a switch from the table
     func switchChanged(sender: UISwitch) {
         let rem: Reminder = self.remindersList[sender.tag] as! Reminder
         if sender.on {
@@ -147,8 +170,6 @@ class ItemsListController: UITableViewController, addReminderDelegate {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    
-
    
     // MARK: - Navigation
 
@@ -157,6 +178,8 @@ class ItemsListController: UITableViewController, addReminderDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
+        
+        // same concept, set the variable before jumping to the next screen, otherwise screen will behave as it is entering a new reminder instead of editing the current one 
         if segue.identifier == "addReminderSegue" {
             let editReminderSegue:EditReminderController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! EditReminderController
             editReminderSegue.delegate = self
